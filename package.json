@@ -22,7 +22,8 @@
     "react-toastify": "^9.1.1",
     "sass": "^1.56.1",
     "typescript": "^4.9.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zarm": "^2.9.17"
   },
   "scripts": {
     "start": "react-scripts start",

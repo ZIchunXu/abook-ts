@@ -1,0 +1,31 @@
+.user {
+    .form {
+        position: fixed;
+        width: 100%;
+        top: 100px;
+        display: flex;
+        justify-content: space-around;
+
+        .left {
+            .avatar {
+                width: 100px;
+                height: 100px;
+                z-index: 1;
+                border-radius: 5px;
+            }
+        }
+
+        .right {
+            .name {
+                font-size: 23px;
+                text-align: left;
+                margin-bottom: 5%;
+            }
+        }
+    }
+    .button {
+        width: 70%;
+        top: 250px;
+        margin:auto;
+    }
+}
