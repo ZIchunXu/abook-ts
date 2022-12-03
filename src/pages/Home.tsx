@@ -1,3 +1,3 @@
 import React, { useState, ChangeEvent, ChangeEventHandler } from "react";
 export const Home = () => {
-    return (<div></div>)}
+    return (<div>This is Home</div>)}

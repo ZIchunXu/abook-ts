@@ -1,4 +1,5 @@
 import { Login } from "../pages/Login";
+import { Home } from "../pages/Home";
 import { Statistics } from "../pages/Statistics";
 import { User } from "../pages/User";
 import { Detail } from "../pages/Detail";
@@ -8,7 +9,7 @@ import { RouteProps } from "../types/types";
 export const routes : RouteProps[] = [
     {
         path: "/",
-        component: Login
+        component: Home
     },
     {
         path: "/statistics",
