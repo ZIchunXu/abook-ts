@@ -1,10 +1,10 @@
-import { Login } from "../pages/Login";
-import { Home } from "../pages/Home";
-import { Statistics } from "../pages/Statistics";
-import { User } from "../pages/User";
-import { Detail } from "../pages/Detail";
-import { UserInfo } from "../pages/UserInfo";
-import { UserPassword } from "../pages/UserPassword";
+import { Login } from "../pages/Login/Login";
+import { Home } from "../pages/Home/Home";
+import { Statistics } from "../pages/Statistics/Statistics";
+import { User } from "../pages/User/User";
+import { Detail } from "../pages/Detail/Detail";
+import { UserInfo } from "../pages/UserInfo/UserInfo";
+import { UserPassword } from "../pages/UserPassword/UserPassword";
 import { RouteProps } from "../types/types";
 export const routes : RouteProps[] = [
     {
