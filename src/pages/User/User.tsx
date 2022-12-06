@@ -31,7 +31,7 @@ export const User = () => {
     }
     return (
     <div className="user">
-        <Button variant="contained" onClick={() => logout()}>Logout</Button>
+        <Button className="logout" variant="contained" onClick={() => logout()}>Logout</Button>
         <div className="head">
           <img className="avatar"style={{ width: 100, height: 100, borderRadius: 8 }} src={user.avatar || '--'} alt="" />
           <span style={{ fontSize: 20}}><b>Name:{user.username || '--'}</b></span>

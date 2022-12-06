@@ -24,8 +24,10 @@
         }
     }
     .button {
-        width: 70%;
+        position: fixed;
+        width: 90%;
+        margin: auto;
         top: 250px;
-        margin:auto;
+        padding: 0 5% 0 5%;
     }
 }

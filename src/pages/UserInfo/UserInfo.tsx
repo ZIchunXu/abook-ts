@@ -4,7 +4,8 @@ import { Input, FilePicker } from 'zarm';
 import { useNavigate } from "react-router-dom";
 import axios from "../../utils/axios";
 import Header from "../../components/Header/Header";
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { imgUrlTrans } from "../../utils/utils";
 import { UserData } from "../../types/types";
 import "./UserInfo.scss"
@@ -59,6 +60,7 @@ export const UserInfo = () => {
     }
     return (
         <div className="user">
+        <ToastContainer/>
             <Header title='User information' />
             <div className="form">
                 <div className="left">
@@ -67,7 +69,6 @@ export const UserInfo = () => {
                         <div className="upload" />
                     </FilePicker>
                 </div>
-                
                 <div className="right">
                     <div className="name">User: {user.username || '--'}</div>
                     <div className="about">
@@ -81,8 +82,8 @@ export const UserInfo = () => {
                         />
                     </div>
                 </div>
+                <Button className="button" variant="contained" onClick={() => uploadInformation()}>Save</Button>
             </div>
-            <Button className="button" variant="contained" onClick={() => uploadInformation()}>Save</Button>
         </div>
     )
 }
