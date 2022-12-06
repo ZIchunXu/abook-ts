@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {Route, Routes, useNavigate, useLocation} from 'react-router-dom';
-import { NavBar } from './components/NavBar';
+import { NavBar } from './components/NavBar/NavBar';
 import { routes } from './router/routes';
-import './App.css';
+import './App.scss';
 
 function App() {
   const location = useLocation();
