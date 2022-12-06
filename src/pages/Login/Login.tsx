@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent, ChangeEventHandler } from "react";
 import { Tabs, Tab, Typography, Box, Alert, Button, TextField, Stack } from "@mui/material";
-import { toast } from 'react-toastify';
-import axios from "../utils/axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "../../utils/axios";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -48,7 +49,6 @@ export const Login = () => {
     const handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if (e.target.name === 'username') {
             setUsername(e.target.value);
-            console.log(e.target.name)
         } else if (e.target.name === 'password') {
             setPassword(e.target.value);
         }
@@ -57,18 +57,14 @@ export const Login = () => {
     const onSubmit = async (username: string, password: string, value: number) => {
         if (!username) {
             toast.error("Please enter username!")
-            console.log(username)
             return;
         }
         if (!password) {
             toast.error("Please enter password!")
-            console.log("pppp")
             return;
         }
-        console.log("www")
         try {
             if (value == 0) {
-                console.log("www")
                 const { data } = await axios.post('/api/user/login', {
                     username,
                     password
@@ -89,6 +85,7 @@ export const Login = () => {
     };
     return (
         <Box sx={{ width: '100%' }}>
+            <ToastContainer/>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Login" {...a11yProps(0)} />
