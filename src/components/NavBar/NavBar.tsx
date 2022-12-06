@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent, ChangeEventHandler } from "react";
-import { Tabs, Tab, Box, BottomNavigation, BottomNavigationAction } from "@mui/material";
+import React, { useState} from "react";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import AssessmentIcon from '@mui/icons-material/Assessment';
