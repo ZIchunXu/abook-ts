@@ -6,6 +6,8 @@ import Header from "../../components/Header/Header";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserData } from "../../types/types";
+import "./UserPassword.scss"
+
 export const UserPassword = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState({} as UserData);
@@ -17,7 +19,7 @@ export const UserPassword = () => {
     }, []);
 
     const getUserInfo = async () => {
-        const { data } = await axios.get('/user/getuser');
+        const { data } = await axios.get('/api/user/getuser');
         setUser(data);
     }
 
@@ -51,29 +53,27 @@ export const UserPassword = () => {
     }
 
     return <div className="pass">
-    <ToastContainer/>
+        <ToastContainer />
         <Header title='Reset Password' />
         <div className="form">
-        <div>
-        </div>
-            <TextField id="password" name="password" value={password} label="Please enter your password"
-                placeholder="Please enter old password"
+            <TextField id="password"
+                name="password"
+                value={password}
+                label="Old Password"
                 onChange={handleOnChange}
             />
-            <br />
             <TextField
                 type="text"
                 name="new_password"
                 value={new_password}
-                placeholder="Please enter new password"
+                label="New Password"
                 onChange={handleOnChange}
             />
-            <br />
             <TextField
                 type="text"
                 name="confrimpassword"
                 value={confrimpassword}
-                placeholder="Please confirm new password"
+                label="Confrim Password"
                 onChange={handleOnChange}
             />
         </div>
@@ -81,7 +81,7 @@ export const UserPassword = () => {
         <div className="button">
             <Button variant="contained" onClick={() => uploadPassword()}>Save</Button>
         </div>
-        
+
     </div>
 }
 export default UserPassword
