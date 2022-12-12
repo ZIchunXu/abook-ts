@@ -2,7 +2,12 @@ import React from "react";
 import Canvas from "@antv/f2-react";
 import { Chart, Interval, Legend, PieLabel } from "@antv/f2";
 import PropTypes from 'prop-types';
-const PieChart = ({ chartData = []}) => {
+import { Idata } from "../../types/types";
+
+interface PieChartProps {
+    chartData: Idata[]
+}
+const PieChart : React.FC<PieChartProps>= ({chartData}) => {
     return (
         <div className="">
             {chartData.length > 0 ? <Canvas pixelRatio={window.devicePixelRatio}>
@@ -52,7 +57,7 @@ const PieChart = ({ chartData = []}) => {
                         flexWrap: 'wrap'
                     }} />
                     <PieLabel
-                        label1={(data) => {
+                        label1={(data : Idata) => {
                             return {
                                 text: `${data.type_name}:${data.percent}%`,
                                 fill: '#808080',
@@ -60,7 +65,7 @@ const PieChart = ({ chartData = []}) => {
                                 fontSize: 10,
                             };
                         }}
-                        onClick={(data) => {
+                        onClick={(data : Idata) => {
                             console.log(data);
                         }}
                     />
@@ -70,8 +75,8 @@ const PieChart = ({ chartData = []}) => {
     );
 };
 
-PieChart.propTypes = {
-    chartData: PropTypes.array,
-}
+// PieChart.propTypes = {
+//     chartData: PropTypes.array,
+// }
 
 export default PieChart;

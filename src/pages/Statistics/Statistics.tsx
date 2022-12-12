@@ -1,40 +1,46 @@
 import React, { useState, useEffect, ChangeEvent, ChangeEventHandler } from "react";
 import PieChart from "../../components/PieChart/PieChart";
 import Popup from "reactjs-popup";
+import { PopupDate } from "../../components/PopupDate/PopupDate";
 import axios from "axios";
 import { Progress, Icon } from 'zarm';
 import dayjs from "dayjs";
+import cx from "classnames";
+import { typeMap } from "../../utils/utils";
+import { Idata } from "../../types/types";
+import './Statistics.scss';
 
 const MyIcon = Icon.createFromIconfont('//at.alicdn.com/t/c/font_3668999_ocqu5v5w59g.js');
-
 export const Statistics = () => {
     const [pieType, setPieType] = useState('expense');
     const [currentMonth, setCurrentMonth] = useState(dayjs().format('YYYY-MM'));
     const [totalExpense, setTotalExpense] = useState(0);
     const [totalIncome, setTotalIncome] = useState(0);
     const [totalType, setType] = useState('expense');
-    const [expenseData, setExpenseData] = useState([]);
-    const [incomeData, setIncomeData] = useState([]);
-    const [chartData, setChartData] = useState([]);
+    const [expenseData, setExpenseData] = useState<Idata[]>([]);
+    const [incomeData, setIncomeData] = useState<Idata[]>([]);
+    const [chartData, setChartData] = useState<Idata[]>([]);
     useEffect(() => {
         getBillList();
       }, [currentMonth])
     
-      const selectMonth = (item) => {
+      const selectMonth = (item : string) => {
         setCurrentMonth(item);
       }
     
-      const changePieType = (type) => {
+      const changePieType = (type : string) => {
         setPieType(type);
+        setType(type);
         setChartData(type == 'expense' ? expenseData : incomeData);
       }
       const getBillList = async () => {
-        const { data } = await axios.get(`/bill/data?date=${currentMonth}`);
+        const { data } = await axios.get(`/api/bill/data?date=${currentMonth}`);
         console.log(data);
         setTotalExpense(data.totalExpense);
         setTotalIncome(data.totalIncome);
-        let expense_data = data.total_data.filter(item => item.pay_type == 1).sort((a, b) => b.number - a.number);
-        let income_data = data.total_data.filter(item => item.pay_type == 2).sort((a, b) => b.number - a.number);
+        const totalData : Idata[] = data.total_data
+        let expense_data = totalData.filter(item => item.pay_type == 1).sort((a, b) => b.number - a.number);
+        let income_data = totalData.filter(item => item.pay_type == 2).sort((a, b) => b.number - a.number);
         expense_data = expense_data.map(item => {
           return {
             ...item,
@@ -55,19 +61,18 @@ export const Statistics = () => {
         setIncomeData(income_data);
         setChartData(pieType == 'expense' ? expense_data : income_data);
       }
-    
-      return (<div className={s.page}>
-        <div className={s.header}>
-          <span className={s.date}>
+      return (<div className="page">
+        <div className="header">
+          <span className="date">
             <Popup trigger={<span>{currentMonth} </span>}>
-              <PopupDate mode="month" onSelect={selectMonth} />
+              <PopupDate onSelect={selectMonth} mode="month" />
             </Popup>
             <MyIcon type="icon--rili" />
           </span>
-          <div className={s.amount}>
-            <span className={s.expense}>Total Expense:</span>
+          <div className="amount">
+            <span className={"expense"}>Total Expense:</span>
             <span>{totalExpense}$</span>
-            <span className={s.income}>Total Income:{totalIncome}$</span>
+            <span className="income">Total Income:{totalIncome}$</span>
           </div>
     
         </div>
@@ -75,19 +80,19 @@ export const Statistics = () => {
         <div className="title">
           <div>Financial Statistics</div>
           <div className="tab">
-            <span className={cx({ [s.active]: totalType == 'expense' })} onClick={() => {setType('expense'), changePieType('expense')}}>Expense</span>
-            <span className={cx({ [s.active]: totalType == 'income' })} onClick={() => {setType('income'), changePieType('income')}}>Income</span>
+            <span  onClick={() => {changePieType('expense')}}>Expense</span>
+            <span  onClick={() => {changePieType('income')}}>Income</span>
           </div>
         </div>
     
         <div className="content">
     
           <div className="pieChart">
-            <PieChart chartData={chartData} totalExpense={totalExpense} totalIncome={totalIncome} />
+            <PieChart chartData={chartData}/>
           </div>
           {
     
-            (totalType == 'expense' ? expenseData : incomeData).map(item => <div className={s.item} key={item.type_id}>
+            (totalType == 'expense' ? expenseData : incomeData).map(item => <div className="item" key={item.type_id}>
               <div className="left">
                 <div className="typeName">
                   <MyIcon type={typeMap[item.type_id] ? typeMap[item.type_id].icon : 'icon-qita'} />
@@ -98,7 +103,7 @@ export const Statistics = () => {
               <div className="right">
                 <Progress
                   shape="line"
-                  percent={Number(item.number / (totalType == 'expense' ? totalExpense : totalIncome) * 100).toFixed(2)}
+                  percent={item.percent}
                   theme='primary'
                 />
               </div>
