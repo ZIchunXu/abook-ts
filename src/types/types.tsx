@@ -24,3 +24,17 @@ export interface TypeData {
     type: number;
     user_id: string;
 }
+
+export interface ITypeMap {
+    [x:string]: {
+        icon: string;
+    };
+}
+
+export interface Idata {
+    type_id: string;
+    type_name: string;
+    pay_type: number;
+    number: number;
+    percent: number;
+}
