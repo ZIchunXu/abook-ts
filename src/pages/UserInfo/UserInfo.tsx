@@ -1,6 +1,6 @@
-import React, { useState, useEffect, ChangeEvent, ChangeEventHandler } from "react";
-import { Tabs, Tab, Avatar, Box, Alert, Button, TextField, Stack } from "@mui/material";
-import { Input, FilePicker } from 'zarm';
+import React, { useState, useEffect, ChangeEvent } from "react";
+import { Avatar, Button, TextField } from "@mui/material";
+import { FilePicker } from 'zarm';
 import { useNavigate } from "react-router-dom";
 import axios from "../../utils/axios";
 import Header from "../../components/Header/Header";
