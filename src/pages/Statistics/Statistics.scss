@@ -46,18 +46,12 @@
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-around;
-
-        .tab {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: space-around;
-        }
     }
 
     .content {
-        height: 90%;
+        height: calc((100% - 350px));
         position: fixed;
-        top: 300px;
+        top: 270px;
         width: 100%;
         overflow: hidden;
         overflow-y: scroll;
